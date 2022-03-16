@@ -3,11 +3,11 @@
 #SBATCH --gres=gpu:1
 #SBATCH --account=ie-idi
 #SBATCH --time=2-00:00:00
-#SBATCH --nodes=2
-#SBATCH --ntasks-per-node=10
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=20
 #SBATCH --mem=256000
 #SBATCH --job-name="train_paintings"
-#SBATCH --output=out/train_paint_2.0.out
+#SBATCH --output=out/train_paint_1.0.out
 #SBATCH --mail-user=hmlangvi@stud.ntnu.no
 #SBATCH --mail-type=ALL
 
@@ -26,6 +26,8 @@ export CUDA_VISIBLE_DEVICES=0,1
 
 echo "CUDA_VISIBLE DEVICES: $CUDA_VISIBLE_DEVICES"
 
+CUDA_LAUNCH_BLOCKING=1
+
 module purge
 module load CUDA/11.3.1
 module load GCCcore/11.2.0
@@ -41,9 +43,12 @@ source env/bin/activate
 # Install required dependencies
 pip install --upgrade pip
 pip install -r requirements.txt
+pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
+
+nvidia-smi
 
 #!./scripts/train_cyclegan.sh
-echo "--------------Starting python scrip-------------t"
+echo "--------------Starting python script-------------"
 python3 train.py --dataroot ./datasets/monet2photo --name monet2photo_cyclegan --model cycle_gan --display_id 0
-echo "-----------------------COMPLETE---------------
+echo "-----------------------COMPLETE---------------"
 uname -a

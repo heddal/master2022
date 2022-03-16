@@ -1,0 +1,158 @@
+We are running from this directory: /cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix
+The name of the job is: train_paintings
+The job ID is 2753981
+The job was run on these nodes: idun-06-08
+Number of nodes: 1
+We are using 20 cores
+We are using 20 cores per node
+Total of 20 cores
+CUDA_VISIBLE DEVICES: 0,1
+Requirement already satisfied: pip in ./env/lib/python3.6/site-packages (21.3.1)
+WARNING: You are using pip version 21.3.1; however, version 22.0.3 is available.
+You should consider upgrading via the '/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/bin/python3 -m pip install --upgrade pip' command.
+Requirement already satisfied: torch>=1.4.0 in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 1)) (1.10.1)
+Requirement already satisfied: torchvision>=0.5.0 in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 2)) (0.11.2)
+Requirement already satisfied: dominate>=2.4.0 in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 3)) (2.6.0)
+Requirement already satisfied: visdom>=0.1.8.8 in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 4)) (0.1.8.9)
+Requirement already satisfied: wandb in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 5)) (0.12.10)
+Requirement already satisfied: pillow in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 6)) (8.4.0)
+Requirement already satisfied: dataclasses in ./env/lib/python3.6/site-packages (from torch>=1.4.0->-r requirements.txt (line 1)) (0.8)
+Requirement already satisfied: typing-extensions in ./env/lib/python3.6/site-packages (from torch>=1.4.0->-r requirements.txt (line 1)) (4.1.1)
+Requirement already satisfied: numpy in ./env/lib/python3.6/site-packages (from torchvision>=0.5.0->-r requirements.txt (line 2)) (1.19.5)
+Requirement already satisfied: scipy in ./env/lib/python3.6/site-packages (from visdom>=0.1.8.8->-r requirements.txt (line 4)) (1.5.4)
+Requirement already satisfied: requests in ./env/lib/python3.6/site-packages (from visdom>=0.1.8.8->-r requirements.txt (line 4)) (2.27.1)
+Requirement already satisfied: tornado in ./env/lib/python3.6/site-packages (from visdom>=0.1.8.8->-r requirements.txt (line 4)) (6.1)
+Requirement already satisfied: pyzmq in ./env/lib/python3.6/site-packages (from visdom>=0.1.8.8->-r requirements.txt (line 4)) (22.3.0)
+Requirement already satisfied: six in ./env/lib/python3.6/site-packages (from visdom>=0.1.8.8->-r requirements.txt (line 4)) (1.16.0)
+Requirement already satisfied: jsonpatch in ./env/lib/python3.6/site-packages (from visdom>=0.1.8.8->-r requirements.txt (line 4)) (1.32)
+Requirement already satisfied: torchfile in ./env/lib/python3.6/site-packages (from visdom>=0.1.8.8->-r requirements.txt (line 4)) (0.1.0)
+Requirement already satisfied: websocket-client in ./env/lib/python3.6/site-packages (from visdom>=0.1.8.8->-r requirements.txt (line 4)) (1.2.3)
+Requirement already satisfied: python-dateutil>=2.6.1 in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (2.8.2)
+Requirement already satisfied: shortuuid>=0.5.0 in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (1.0.8)
+Requirement already satisfied: PyYAML in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (6.0)
+Requirement already satisfied: protobuf>=3.12.0 in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (3.19.4)
+Requirement already satisfied: pathtools in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (0.1.2)
+Requirement already satisfied: docker-pycreds>=0.4.0 in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (0.4.0)
+Requirement already satisfied: yaspin>=1.0.0 in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (2.1.0)
+Requirement already satisfied: promise<3,>=2.0 in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (2.3)
+Requirement already satisfied: Click!=8.0.0,>=7.0 in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (8.0.3)
+Requirement already satisfied: sentry-sdk>=1.0.0 in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (1.5.5)
+Requirement already satisfied: GitPython>=1.0.0 in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (3.1.18)
+Requirement already satisfied: psutil>=5.0.0 in ./env/lib/python3.6/site-packages (from wandb->-r requirements.txt (line 5)) (5.9.0)
+Requirement already satisfied: importlib-metadata in ./env/lib/python3.6/site-packages (from Click!=8.0.0,>=7.0->wandb->-r requirements.txt (line 5)) (4.8.3)
+Requirement already satisfied: gitdb<5,>=4.0.1 in ./env/lib/python3.6/site-packages (from GitPython>=1.0.0->wandb->-r requirements.txt (line 5)) (4.0.9)
+Requirement already satisfied: idna<4,>=2.5 in ./env/lib/python3.6/site-packages (from requests->visdom>=0.1.8.8->-r requirements.txt (line 4)) (3.3)
+Requirement already satisfied: certifi>=2017.4.17 in ./env/lib/python3.6/site-packages (from requests->visdom>=0.1.8.8->-r requirements.txt (line 4)) (2021.10.8)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in ./env/lib/python3.6/site-packages (from requests->visdom>=0.1.8.8->-r requirements.txt (line 4)) (1.26.8)
+Requirement already satisfied: charset-normalizer~=2.0.0 in ./env/lib/python3.6/site-packages (from requests->visdom>=0.1.8.8->-r requirements.txt (line 4)) (2.0.12)
+Requirement already satisfied: termcolor<2.0.0,>=1.1.0 in ./env/lib/python3.6/site-packages (from yaspin>=1.0.0->wandb->-r requirements.txt (line 5)) (1.1.0)
+Requirement already satisfied: jsonpointer>=1.9 in ./env/lib/python3.6/site-packages (from jsonpatch->visdom>=0.1.8.8->-r requirements.txt (line 4)) (2.2)
+Requirement already satisfied: smmap<6,>=3.0.1 in ./env/lib/python3.6/site-packages (from gitdb<5,>=4.0.1->GitPython>=1.0.0->wandb->-r requirements.txt (line 5)) (5.0.0)
+Requirement already satisfied: zipp>=0.5 in ./env/lib/python3.6/site-packages (from importlib-metadata->Click!=8.0.0,>=7.0->wandb->-r requirements.txt (line 5)) (3.6.0)
+WARNING: You are using pip version 21.3.1; however, version 22.0.3 is available.
+You should consider upgrading via the '/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/bin/python3 -m pip install --upgrade pip' command.
+--------------Starting python scrip-------------t
+/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torch/cuda/__init__.py:143: UserWarning: 
+A100-SXM-80GB with CUDA capability sm_80 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_70.
+If you want to use the A100-SXM-80GB GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(incompatible_device_warn.format(device_name, capability, " ".join(arch_list), device_name))
+/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torchvision/transforms/transforms.py:288: UserWarning: Argument interpolation should be of type InterpolationMode instead of int. Please, use InterpolationMode enum.
+  "Argument interpolation should be of type InterpolationMode instead of int. "
+----------------- Options ---------------
+               batch_size: 1                             
+                    beta1: 0.5                           
+          checkpoints_dir: ./checkpoints                 
+           continue_train: False                         
+                crop_size: 256                           
+                 dataroot: ./datasets/monet2photo        	[default: None]
+             dataset_mode: unaligned                     
+                direction: AtoB                          
+              display_env: main                          
+             display_freq: 400                           
+               display_id: 0                             	[default: 1]
+            display_ncols: 4                             
+             display_port: 8097                          
+           display_server: http://localhost              
+          display_winsize: 256                           
+                    epoch: latest                        
+              epoch_count: 1                             
+                 gan_mode: lsgan                         
+                  gpu_ids: 0                             
+                init_gain: 0.02                          
+                init_type: normal                        
+                 input_nc: 3                             
+                  isTrain: True                          	[default: None]
+                 lambda_A: 10.0                          
+                 lambda_B: 10.0                          
+          lambda_identity: 0.5                           
+                load_iter: 0                             	[default: 0]
+                load_size: 286                           
+                       lr: 0.0002                        
+           lr_decay_iters: 50                            
+                lr_policy: linear                        
+         max_dataset_size: inf                           
+                    model: cycle_gan                     
+                 n_epochs: 100                           
+           n_epochs_decay: 100                           
+               n_layers_D: 3                             
+                     name: monet2photo_cyclegan          	[default: experiment_name]
+                      ndf: 64                            
+                     netD: basic                         
+                     netG: resnet_9blocks                
+                      ngf: 64                            
+               no_dropout: True                          
+                  no_flip: False                         
+                  no_html: False                         
+                     norm: instance                      
+              num_threads: 4                             
+                output_nc: 3                             
+                    phase: train                         
+                pool_size: 50                            
+               preprocess: resize_and_crop               
+               print_freq: 100                           
+             save_by_iter: False                         
+          save_epoch_freq: 5                             
+         save_latest_freq: 5000                          
+           serial_batches: False                         
+                   suffix:                               
+         update_html_freq: 1000                          
+                use_wandb: False                         
+                  verbose: False                         
+----------------- End -------------------
+dataset [UnalignedDataset] was created
+The number of training images = 6287
+initialize network with normal
+Traceback (most recent call last):
+  File "train.py", line 33, in <module>
+    model = create_model(opt)      # create a model given opt.model and other options
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/models/__init__.py", line 65, in create_model
+    instance = model(opt)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/models/cycle_gan_model.py", line 74, in __init__
+    not opt.no_dropout, opt.init_type, opt.init_gain, self.gpu_ids)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/models/networks.py", line 159, in define_G
+    return init_net(net, init_type, init_gain, gpu_ids)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/models/networks.py", line 115, in init_net
+    init_weights(net, init_type, init_gain=init_gain)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/models/networks.py", line 98, in init_weights
+    net.apply(init_func)  # apply the initialization function <init_func>
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torch/nn/modules/module.py", line 659, in apply
+    module.apply(fn)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torch/nn/modules/module.py", line 659, in apply
+    module.apply(fn)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torch/nn/modules/module.py", line 659, in apply
+    module.apply(fn)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torch/nn/modules/module.py", line 660, in apply
+    fn(self)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/models/networks.py", line 82, in init_func
+    init.normal_(m.weight.data, 0.0, init_gain)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torch/nn/init.py", line 151, in normal_
+    return _no_grad_normal_(tensor, mean, std)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torch/nn/init.py", line 19, in _no_grad_normal_
+    return tensor.normal_(mean, std)
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+/var/slurm_spool/job2753981/slurm_script: line 48: unexpected EOF while looking for matching `"'
+/var/slurm_spool/job2753981/slurm_script: line 50: syntax error: unexpected end of file
