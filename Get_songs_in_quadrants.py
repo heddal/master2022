@@ -2,9 +2,9 @@ from json.tool import main
 import requests
 import pandas as pd
 import xgboost as xgb
+import sys
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
 
 
 # chosen songs
@@ -97,12 +97,10 @@ def train_songs(testing_set, training_set):
     X_train, X_test, Y_train, Y_test = train_test_split(
         X, Y, test_size=test_size, random_state=seed)
 
-    model = xgb.XGBClassifier()
+    model = xgb.XGBClassifier(use_label_encoder=False, eval_metric='mlogloss')
     model.fit(X_train, Y_train)
 
     prediction = model.predict(X_test)
-    accuracy = accuracy_score(Y_test, prediction)
-    print("Accuracy: %.2f%%" % (accuracy * 100.0))
 
     test_data = testing_set[training_set.columns.difference(
         ['Song', 'Quadrant'])]
@@ -111,9 +109,7 @@ def train_songs(testing_set, training_set):
     return test_predictions
 
 
-def get_quadrant():
-    song_id = input("Please enter a song id from TheAudioDB:\n")
-
+def get_quadrant(song_id):
     # get song info
     response = requests.get(
         "https://theaudiodb.com/api/v1/json/2/track.php?h=" + song_id).json()
@@ -143,12 +139,13 @@ def get_quadrant():
     training_set = panda_data_set_cleaned
 
     quadrant = train_songs(testing_set=testing_set, training_set=training_set)
-    print("Quadrant for %s is: Q%s" % (song_title, str(quadrant[0]+1)))
-    return quadrant[0]+1
+    return quadrant[0]
 
 
 def main():
-    get_quadrant()
+    q = get_quadrant(sys.argv[1])
+    print(q+1)
+    return str(q+1)
 
 
 if __name__ == "__main__":
