@@ -1,7 +1,7 @@
 We are running from this directory: /cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix
 The name of the job is: train_paintings
-The job ID is 2809218
-The job was run on these nodes: idun-06-01
+The job ID is 2809422
+The job was run on these nodes: idun-05-10
 Number of nodes: 1
 We are using 20 cores
 We are using 20 cores per node
@@ -52,7 +52,7 @@ Quadrant: 4
                     model: test                          
              model_suffix:                               
                n_layers_D: 3                             
-                     name: photo2art_cyclegan_Hedda      	[default: experiment_name]
+                     name: monet2photo_cyclegan          	[default: experiment_name]
                       ndf: 64                            
                      netD: basic                         
                      netG: resnet_9blocks                
@@ -74,7 +74,7 @@ Quadrant: 4
 dataset [SingleDataset] was created
 initialize network with normal
 model [TestModel] was created
-loading the model from ./checkpoints/photo2art_cyclegan_Hedda/latest_net_G.pth
+loading the model from ./checkpoints/monet2photo_cyclegan/latest_net_G.pth
 Traceback (most recent call last):
   File "test.py", line 52, in <module>
     model.setup(opt)               # regular setup: load and print networks; create schedulers
@@ -88,6 +88,6 @@ Traceback (most recent call last):
     return _open_file(name_or_buffer, mode)
   File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torch/serialization.py", line 211, in __init__
     super(_open_file, self).__init__(open(name, mode))
-FileNotFoundError: [Errno 2] No such file or directory: './checkpoints/photo2art_cyclegan_Hedda/latest_net_G.pth'
+FileNotFoundError: [Errno 2] No such file or directory: './checkpoints/monet2photo_cyclegan/latest_net_G.pth'
 -----------------------COMPLETE-------------------
-Linux idun-06-01 4.18.0-193.el8.x86_64 #1 SMP Fri May 8 10:59:10 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+Linux idun-05-10 4.18.0-193.el8.x86_64 #1 SMP Fri May 8 10:59:10 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux

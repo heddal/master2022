@@ -45,10 +45,9 @@ pip install --upgrade pip
 pip install -r requirements.txt
 pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 
-nvidia-smi
-
 #!./scripts/train_cyclegan.sh
 echo "--------------Starting python script-------------"
-python3 train.py --dataroot ./datasets/monet2photo --name monet2photo_cyclegan --model cycle_gan --display_id 0
+quadrant=$(python3 Get_songs_in_quadrants.py 32822998)
+python3 train.py --dataroot ./datasets/No_face/ --name photo2art_hedda --model cycle_gan --display_id 0 --n_epochs 50 --n_epochs_decay 50
 echo "-----------------------COMPLETE---------------"
 uname -a
