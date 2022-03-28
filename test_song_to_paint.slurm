@@ -47,7 +47,8 @@ pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu
 
 #!./scripts/train_cyclegan.sh
 echo "--------------Starting python script----------------"
-quadrant = python3 get_songs_in_quadrants.py
+quadrant = $(python3 Get_songs_in_quadrants.py)
+echo "Quadrant: Q$quadrant"
 python3 test.py --dataroot ./datasets/No_face/$quadrant --name photo2art_cyclegan_Hedda --model test --no_dropout --display_id 0
 echo "-----------------------COMPLETE-------------------"
 uname -a

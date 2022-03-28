@@ -7,7 +7,7 @@
 #SBATCH --ntasks-per-node=20
 #SBATCH --mem=256000
 #SBATCH --job-name="train_paintings"
-#SBATCH --output=out/train_paint_1.0.out
+#SBATCH --output=out/train_paint_2.0.out
 #SBATCH --mail-user=hmlangvi@stud.ntnu.no
 #SBATCH --mail-type=ALL
 
