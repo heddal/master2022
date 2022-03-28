@@ -144,7 +144,7 @@ def get_quadrant():
 
     quadrant = train_songs(testing_set=testing_set, training_set=training_set)
     print("Quadrant for %s is: Q%s" % (song_title, str(quadrant[0]+1)))
-    return quadrant+1
+    return quadrant[0]+1
 
 
 def main():
