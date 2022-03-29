@@ -1,6 +1,6 @@
 We are running from this directory: /cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix
 The name of the job is: train_paintings
-The job ID is 2810125
+The job ID is 2810135
 The job was run on these nodes: idun-05-10
 Number of nodes: 1
 We are using 20 cores
@@ -24,10 +24,10 @@ Requirement already satisfied: torchvision==0.11.3+cu113 in ./env/lib/python3.6/
 Requirement already satisfied: torchaudio==0.10.2+cu113 in ./env/lib/python3.6/site-packages (0.10.2+cu113)
 Requirement already satisfied: dataclasses in ./env/lib/python3.6/site-packages (from torch==1.10.2+cu113) (0.8)
 Requirement already satisfied: typing-extensions in ./env/lib/python3.6/site-packages (from torch==1.10.2+cu113) (4.1.1)
-Requirement already satisfied: numpy in ./env/lib/python3.6/site-packages (from torchvision==0.11.3+cu113) (1.19.5)
 Requirement already satisfied: pillow!=8.3.0,>=5.3.0 in ./env/lib/python3.6/site-packages (from torchvision==0.11.3+cu113) (8.4.0)
+Requirement already satisfied: numpy in ./env/lib/python3.6/site-packages (from torchvision==0.11.3+cu113) (1.19.5)
 --------------Starting python script----------------
-Quadrant: 4
+Quadrant: 1
 /cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torchvision/transforms/transforms.py:288: UserWarning: Argument interpolation should be of type InterpolationMode instead of int. Please, use InterpolationMode enum.
   "Argument interpolation should be of type InterpolationMode instead of int. "
 ----------------- Options ---------------
@@ -35,7 +35,7 @@ Quadrant: 4
                batch_size: 1                             
           checkpoints_dir: ./checkpoints                 
                 crop_size: 256                           
-                 dataroot: ./datasets/No_face/testB/Q4   	[default: None]
+                 dataroot: ./datasets/No_face/testB/Q1   	[default: None]
              dataset_mode: single                        
                 direction: AtoB                          
           display_winsize: 256                           
@@ -65,7 +65,7 @@ Quadrant: 4
                 output_nc: 3                             
                     phase: test                          
                preprocess: resize_and_crop               
-              results_dir: ./results/Q4_AtoB             	[default: ./results/]
+              results_dir: ./results/Q1_32802707_AtoB    	[default: ./results/]
            serial_batches: False                         
                    suffix:                               
                 use_wandb: False                         
@@ -78,11 +78,15 @@ loading the model from ./checkpoints/photo2art_hedda/latest_net_G.pth
 ---------- Networks initialized -------------
 [Network G] Total number of parameters : 11.378 M
 -----------------------------------------------
-creating web directory ./results/Q4_AtoB/photo2art_hedda/test_latest
-processing (0000)-th image... ['./datasets/No_face/testB/Q4/a-boat-beached-in-a-port-at-low-tide-1825.jpg']
-processing (0005)-th image... ['./datasets/No_face/testB/Q4/french-coastal-scene-1868.jpg']
-processing (0010)-th image... ['./datasets/No_face/testB/Q4/on-the-island-valaam.jpg']
-processing (0015)-th image... ['./datasets/No_face/testB/Q4/the-campaign-at-sunrise.jpg']
-processing (0020)-th image... ['./datasets/No_face/testB/Q4/wall-in-naples-1782.jpg']
+creating web directory ./results/Q1_32802707_AtoB/photo2art_hedda/test_latest
+processing (0000)-th image... ['./datasets/No_face/testB/Q1/a-hilltop-naples-1782.jpg']
+processing (0005)-th image... ['./datasets/No_face/testB/Q1/before-a-thunderstorm-1869.jpg']
+processing (0010)-th image... ['./datasets/No_face/testB/Q1/flatford-mill-from-a-lock-on-the-stour-1811.jpg']
+processing (0015)-th image... ['./datasets/No_face/testB/Q1/mausoleum-of-shah-i-zinda-in-samarkand-1870.jpg']
+processing (0020)-th image... ['./datasets/No_face/testB/Q1/port-la-rochellef.jpg']
+processing (0025)-th image... ['./datasets/No_face/testB/Q1/rye.jpg']
+processing (0030)-th image... ['./datasets/No_face/testB/Q1/the-bay-of-naples-and-the-mole-lighthouse-1782.jpg']
+processing (0035)-th image... ['./datasets/No_face/testB/Q1/the-river-tweed-near-kelso-1800.jpg']
+processing (0040)-th image... ['./datasets/No_face/testB/Q1/weymouth-bay-with-jordan-hill-1816.jpg']
 -----------------------COMPLETE-------------------
 Linux idun-05-10 4.18.0-193.el8.x86_64 #1 SMP Fri May 8 10:59:10 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux

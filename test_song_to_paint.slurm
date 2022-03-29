@@ -7,7 +7,7 @@
 #SBATCH --ntasks-per-node=20
 #SBATCH --mem=256000
 #SBATCH --job-name="train_paintings"
-#SBATCH --output=out/test_1.out
+#SBATCH --output=out/test_2_32802707.out
 #SBATCH --mail-user=hmlangvi@stud.ntnu.no
 #SBATCH --mail-type=ALL
 
@@ -45,10 +45,12 @@ pip install --upgrade pip
 pip install -r requirements.txt
 pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 
+song_id=32802707
+
 #!./scripts/train_cyclegan.sh
 echo "--------------Starting python script----------------"
-quadrant=$(python3 Get_songs_in_quadrants.py 32822998)
+quadrant=$(python3 Get_songs_in_quadrants.py ${song_id})
 echo "Quadrant: $quadrant"
-python3 test.py --dataroot ./datasets/No_face/testB/Q${quadrant} --preprocess resize_and_crop --name photo2art_hedda --model test --no_dropout
+python3 test.py --dataroot ./datasets/No_face/testB/Q${quadrant} --preprocess resize_and_crop --name photo2art_hedda --model test --no_dropout --results_dir ./results/Q${quadrant}_${song_id}_AtoB
 echo "-----------------------COMPLETE-------------------"
 uname -a
