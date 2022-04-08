@@ -2,7 +2,6 @@
 debug*
 datasets/
 *.pth
-results/
 build/
 env/
 dist/
