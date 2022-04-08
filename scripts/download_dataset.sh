@@ -8,6 +8,6 @@ fi
 
 source env/bin/activate
 pip install gdown
-URL_ID=1xptN3-rXjnsysrBQSdWvkeLnc-L9IB1Q
+URL_ID=1Pfy0fGrNxXH-tZ10ZU-MsgA5YejkRCB3
 echo "downloading from $URL_ID"
 gdown $URL_ID
