@@ -5,6 +5,7 @@ import xgboost as xgb
 import sys
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
+import hashlib
 
 
 # chosen songs
@@ -44,12 +45,13 @@ def clean_data_panda(dataset):
     cleaned_dataset = array_to_ohe(dataset, 'MoodsStr')
 
     cleaned_dataset['Quadrant'] = le.fit_transform(cleaned_dataset['Quadrant'])
-    cleaned_dataset['Artist'] = le.fit_transform(cleaned_dataset['Artist'])
+    cleaned_dataset['Artist'] = cleaned_dataset['Artist'].astype(str).str.encode(
+        'UTF-8').apply(lambda x: int(hashlib.md5(x).hexdigest(), 16))
 
-    return (cleaned_dataset, le)
+    return cleaned_dataset
 
 
-def clean_data(dataset, le):
+def clean_data(dataset):
     # drop columns with no common things or gives any information:
     #SampleURL, Song, Title, Sample
     # drop all description columns
@@ -84,8 +86,8 @@ def clean_data(dataset, le):
         transformed_dataset = strings_to_array(transformed_dataset, 'strGenre')
         transformed_dataset = array_to_ohe(transformed_dataset, 'strGenre')
 
-    transformed_dataset['Artist'] = le.fit_transform(
-        transformed_dataset['Artist'])
+    transformed_dataset['Artist'] = transformed_dataset['Artist'].astype(
+        str).str.encode('UTF-8').apply(lambda x: int(hashlib.md5(x).hexdigest(), 16))
 
     return transformed_dataset
 
@@ -121,7 +123,7 @@ def get_quadrant(song_id):
     # get test data
     panda_data_set = pd.read_csv(
         'data/train_panda.csv', encoding='unicode_escape')
-    cleaned_panda, le = clean_data_panda(panda_data_set.copy())
+    cleaned_panda = clean_data_panda(panda_data_set.copy())
     panda_data_set_cleaned = cleaned_panda
 
     # get song info
@@ -131,7 +133,7 @@ def get_quadrant(song_id):
     song_title = song_info["strTrack"]
     data_frame = pd.DataFrame(song_info, index=[0])
     try_cleaning = data_frame.copy()
-    cleaned = clean_data(try_cleaning, le)
+    cleaned = clean_data(try_cleaning)
 
     # format song info
     test_set_songs = panda_data_set_cleaned.iloc[:0].copy()
