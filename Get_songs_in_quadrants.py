@@ -1,4 +1,6 @@
+from cgi import test
 from json.tool import main
+from operator import le
 import requests
 import pandas as pd
 import xgboost as xgb
@@ -6,13 +8,13 @@ import numpy as np
 import sys
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-import hashlib
+from sklearn.metrics import accuracy_score
 
 
 # chosen songs
-""" song_ids = ["32822998", "32802707", "32767148", 
-            "35027980", "32978788", "35787816", 
-            "33033015", "32734677", "32724218", 
+""" song_ids = ["32822998", "32802707", "32767148",
+            "35027980", "32978788", "35787816",
+            "33033015", "32734677", "32724218",
             "33155473", "32801239", "32769006"] """
 
 
@@ -30,10 +32,11 @@ def array_to_ohe(dataset, column):
 
 
 def clean_data_panda(dataset):
-    le = preprocessing.LabelEncoder()
+    leQ = preprocessing.LabelEncoder()
+    leA = preprocessing.LabelEncoder()
 
     dataset.drop(columns=['MoodsFoundStr', 'MoodsStrSplit', 'Moods',
-                          'Title', 'Sample', 'SampleURL', 'PQuad'], inplace=True)
+                          'Title', 'Sample', 'SampleURL', 'PQuad', "MoodsTotal", "Genres"], inplace=True)
 
     cleaned_dataset = dataset
     cleaned_dataset = strings_to_array(cleaned_dataset, 'GenresStr')
@@ -42,10 +45,11 @@ def clean_data_panda(dataset):
     cleaned_dataset = strings_to_array(cleaned_dataset, 'MoodsStr')
     cleaned_dataset = array_to_ohe(cleaned_dataset, 'MoodsStr')
 
-    cleaned_dataset['Quadrant'] = le.fit_transform(cleaned_dataset['Quadrant'])
-    cleaned_dataset['Artist'] = le.fit_transform(cleaned_dataset['Artist'])
+    cleaned_dataset['Quadrant'] = leQ.fit_transform(
+        cleaned_dataset['Quadrant'])
+    cleaned_dataset['Artist'] = leA.fit_transform(cleaned_dataset['Artist'])
 
-    return (cleaned_dataset, le)
+    return (cleaned_dataset, leQ, leA)
 
 
 def clean_data(dataset, le):
@@ -89,13 +93,6 @@ def clean_data(dataset, le):
     return transformed_dataset
 
 
-def fill_nan_spaces(df):
-    df = df.assign(MoodsTotal=1, Genres=1)
-    df = df.fillna(0)
-    df.drop('Quadrant', inplace=True, axis=1)
-    return df
-
-
 def train_songs(testing_set, training_set):
     X = training_set[training_set.columns.difference(['Song', 'Quadrant'])]
     Y = training_set['Quadrant']
@@ -106,9 +103,11 @@ def train_songs(testing_set, training_set):
 
     model = xgb.XGBClassifier(use_label_encoder=False, eval_metric='mlogloss')
     model.fit(X_train, Y_train)
+    y_pred = model.predict(X_test)
 
     test_data = testing_set[training_set.columns.difference(
         ['Song', 'Quadrant'])]
+
     test_predictions = model.predict(test_data)
 
     return test_predictions
@@ -118,8 +117,9 @@ def get_quadrant(song_id):
     # get test data
     panda_data_set = pd.read_csv(
         'data/train_panda.csv', encoding='unicode_escape')
-    cleaned_panda, le = clean_data_panda(panda_data_set.copy())
+    cleaned_panda, leQ, leA = clean_data_panda(panda_data_set.copy())
     panda_data_set_cleaned = cleaned_panda
+    print(panda_data_set_cleaned.head(1).values.tolist())
 
     # get song info
     response = requests.get(
@@ -128,7 +128,8 @@ def get_quadrant(song_id):
     song_title = song_info["strTrack"]
     data_frame = pd.DataFrame(song_info, index=[0])
     try_cleaning = data_frame.copy()
-    cleaned = clean_data(try_cleaning, le)
+    cleaned = clean_data(try_cleaning, leA)
+    print(cleaned.head(1).values.tolist())
 
     # format song info
     test_set_songs = panda_data_set_cleaned.iloc[:0].copy()
@@ -137,20 +138,24 @@ def get_quadrant(song_id):
     common_cols = list(set(test_set_songs.columns).intersection(
         panda_data_set_cleaned.columns))  # keep only the columns that are in panda
     final_test_set_songs = test_set_songs[common_cols]
-    final_test_set_songs = fill_nan_spaces(final_test_set_songs)
+
+    final_test_set_songs = final_test_set_songs.fillna(0)
+    print(final_test_set_songs.head(1).values.tolist())
 
     # testing and traning set
     testing_set = final_test_set_songs
     training_set = panda_data_set_cleaned
 
-    quadrant = train_songs(testing_set=testing_set, training_set=training_set)
+    quadrant = train_songs(testing_set=testing_set,
+                           training_set=training_set)
+    quadrant = leQ.inverse_transform(quadrant)
     return quadrant[0]
 
 
 def main():
     q = get_quadrant(sys.argv[1])
-    print(q+1)
-    return str(q+1)
+    print(q)
+    return q
 
 
 if __name__ == "__main__":
