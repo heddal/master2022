@@ -7,7 +7,7 @@
 #SBATCH --ntasks-per-node=20
 #SBATCH --mem=256000
 #SBATCH --job-name="train_paintings"
-#SBATCH --output=out/landscapes/32822998.out
+#SBATCH --output=out/landscapes/32769006.out
 #SBATCH --mail-user=hmlangvi@stud.ntnu.no
 #SBATCH --mail-type=ALL
 
@@ -47,7 +47,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 
-song_id=32822998 
+song_id=32769006
 results_folder=./results/landscapes/${song_id}
 
 #!./scripts/train_cyclegan.sh
