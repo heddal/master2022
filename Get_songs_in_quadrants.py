@@ -31,18 +31,15 @@ def array_to_ohe(dataset, column):
 def clean_data_panda(dataset):
     le = preprocessing.LabelEncoder()
 
-    # drop columns with no common things or gives any information:
-    #SampleURL, Song, Title, Sample
-
     dataset.drop(columns=['MoodsFoundStr', 'MoodsStrSplit', 'Moods',
                           'Title', 'Sample', 'SampleURL', 'PQuad'], inplace=True)
-    #dataset.drop(columns=['MoodsFoundStr', 'Moods', 'PQuad'], inplace=True)
 
-    cleaned_dataset = strings_to_array(dataset, 'GenresStr')
-    cleaned_dataset = array_to_ohe(dataset, 'GenresStr')
+    cleaned_dataset = dataset
+    cleaned_dataset = strings_to_array(cleaned_dataset, 'GenresStr')
+    cleaned_dataset = array_to_ohe(cleaned_dataset, 'GenresStr')
 
-    cleaned_dataset = strings_to_array(dataset, 'MoodsStr')
-    cleaned_dataset = array_to_ohe(dataset, 'MoodsStr')
+    cleaned_dataset = strings_to_array(cleaned_dataset, 'MoodsStr')
+    cleaned_dataset = array_to_ohe(cleaned_dataset, 'MoodsStr')
 
     cleaned_dataset['Quadrant'] = le.fit_transform(cleaned_dataset['Quadrant'])
     cleaned_dataset['Artist'] = cleaned_dataset['Artist'].astype(str).str.encode(
@@ -52,9 +49,7 @@ def clean_data_panda(dataset):
 
 
 def clean_data(dataset):
-    # drop columns with no common things or gives any information:
-    #SampleURL, Song, Title, Sample
-    # drop all description columns
+
     countries = ['EN', 'DE', 'FR', 'CN', 'IT', 'JP', 'RU',
                  'ES', 'PT', 'SE', 'NL', 'HU', 'NO', 'IL', 'PL']
     for c in countries:
@@ -109,8 +104,6 @@ def train_songs(testing_set, training_set):
 
     model = xgb.XGBClassifier(use_label_encoder=False, eval_metric='mlogloss')
     model.fit(X_train, Y_train)
-
-    prediction = model.predict(X_test)
 
     test_data = testing_set[training_set.columns.difference(
         ['Song', 'Quadrant'])]
