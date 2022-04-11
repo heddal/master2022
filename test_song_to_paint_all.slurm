@@ -53,7 +53,7 @@ echo "--------------Starting python script----------------"
 quadrant=$(python3 Get_songs_in_quadrants.py ${song_id})
 #quadrant=1
 echo "Quadrant: $quadrant"
-python3 test.py --dataroot ./datasets/All/Q${quadrant} --preprocess resize_and_crop --name photo2art --model test --no_dropout --results_dir results_folder
+python3 test.py --dataroot ./datasets/All/Q${quadrant} --preprocess resize_and_crop --name photo2art_hedda --model test --no_dropout --results_dir results_folder
 python3 select_random_image.py results_folder
 echo "-----------------------COMPLETE-------------------"
 uname -a
