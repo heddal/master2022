@@ -7,7 +7,7 @@
 #SBATCH --ntasks-per-node=20
 #SBATCH --mem=256000
 #SBATCH --job-name="train_paintings"
-#SBATCH --output=out/landscapes/33744967.out
+#SBATCH --output=out/landscapes/B/32769006.out
 #SBATCH --mail-user=hmlangvi@stud.ntnu.no
 #SBATCH --mail-type=ALL
 
@@ -47,15 +47,15 @@ pip install --upgrade pip
 pip install -r requirements.txt
 pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 
-song_id=33744967
-results_folder=./results/landscapes/${song_id}
+song_id=32769006
+results_folder=./results/landscapes/B/${song_id}
 
 #!./scripts/train_cyclegan.sh
 echo "--------------Starting python script----------------"
 quadrant=$(python3 Get_songs_in_quadrants.py ${song_id})
 #quadrant=1
 echo "Quadrant: $quadrant"
-python3 test.py --dataroot ./datasets/landscapes/Q${quadrant} --name photo2art_hedda --model test --no_dropout --results_dir ${results_folder}
+python3 test.py --dataroot ./datasets/landscapes/B/${quadrant} --name photo2art_hedda --model test --no_dropout --results_dir ${results_folder}
 python3 select_random_image.py ${results_folder}
 echo "-----------------------COMPLETE-------------------"
 uname -a

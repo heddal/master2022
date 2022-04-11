@@ -1,0 +1,95 @@
+Lets go
+We are running from this directory: /cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix
+The name of the job is: train_paintings
+The job ID is 2869703
+The job was run on these nodes: idun-05-11
+Number of nodes: 1
+We are using 20 cores
+We are using 20 cores per node
+Total of 20 cores
+CUDA_VISIBLE DEVICES: 0,1
+Requirement already satisfied: pip in ./env/lib/python3.6/site-packages (21.3.1)
+Requirement already satisfied: dominate>=2.4.0 in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 1)) (2.6.0)
+Requirement already satisfied: visdom>=0.1.8.8 in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 2)) (0.1.8.9)
+Requirement already satisfied: wandb in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 3)) (0.12.10)
+Requirement already satisfied: pillow in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 4)) (8.4.0)
+Requirement already satisfied: requests in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 5)) (2.27.1)
+Requirement already satisfied: pandas in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 6)) (1.1.5)
+Requirement already satisfied: xgboost in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 7)) (1.5.2)
+Requirement already satisfied: sklearn in ./env/lib/python3.6/site-packages (from -r requirements.txt (line 8)) (0.0)
+ERROR: Could not find a version that satisfies the requirement sys (from versions: none)
+ERROR: No matching distribution found for sys
+Looking in links: https://download.pytorch.org/whl/cu113/torch_stable.html
+Requirement already satisfied: torch==1.10.2+cu113 in ./env/lib/python3.6/site-packages (1.10.2+cu113)
+Requirement already satisfied: torchvision==0.11.3+cu113 in ./env/lib/python3.6/site-packages (0.11.3+cu113)
+Requirement already satisfied: torchaudio==0.10.2+cu113 in ./env/lib/python3.6/site-packages (0.10.2+cu113)
+Requirement already satisfied: dataclasses in ./env/lib/python3.6/site-packages (from torch==1.10.2+cu113) (0.8)
+Requirement already satisfied: typing-extensions in ./env/lib/python3.6/site-packages (from torch==1.10.2+cu113) (4.1.1)
+Requirement already satisfied: numpy in ./env/lib/python3.6/site-packages (from torchvision==0.11.3+cu113) (1.19.5)
+Requirement already satisfied: pillow!=8.3.0,>=5.3.0 in ./env/lib/python3.6/site-packages (from torchvision==0.11.3+cu113) (8.4.0)
+--------------Starting python script----------------
+Quadrant: Q1
+/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/torchvision/transforms/transforms.py:288: UserWarning: Argument interpolation should be of type InterpolationMode instead of int. Please, use InterpolationMode enum.
+  "Argument interpolation should be of type InterpolationMode instead of int. "
+----------------- Options ---------------
+             aspect_ratio: 1.0                           
+               batch_size: 1                             
+          checkpoints_dir: ./checkpoints                 
+                crop_size: 256                           
+                 dataroot: ./datasets/landscapes/B/Q1    	[default: None]
+             dataset_mode: single                        
+                direction: AtoB                          
+          display_winsize: 256                           
+                    epoch: latest                        
+                     eval: False                         
+                  gpu_ids: 0                             
+                init_gain: 0.02                          
+                init_type: normal                        
+                 input_nc: 3                             
+                  isTrain: False                         	[default: None]
+                load_iter: 0                             	[default: 0]
+                load_size: 256                           
+         max_dataset_size: inf                           
+                    model: test                          
+             model_suffix:                               
+               n_layers_D: 3                             
+                     name: photo2art_hedda               	[default: experiment_name]
+                      ndf: 64                            
+                     netD: basic                         
+                     netG: resnet_9blocks                
+                      ngf: 64                            
+               no_dropout: True                          	[default: False]
+                  no_flip: False                         
+                     norm: instance                      
+                 num_test: 50                            
+              num_threads: 4                             
+                output_nc: 3                             
+                    phase: test                          
+               preprocess: resize_and_crop               
+              results_dir: ./results/landscapes/B/33033015	[default: ./results/]
+           serial_batches: False                         
+                   suffix:                               
+                use_wandb: False                         
+                  verbose: False                         
+----------------- End -------------------
+dataset [SingleDataset] was created
+initialize network with normal
+model [TestModel] was created
+loading the model from ./checkpoints/photo2art_hedda/latest_net_G.pth
+---------- Networks initialized -------------
+[Network G] Total number of parameters : 11.378 M
+-----------------------------------------------
+creating web directory ./results/landscapes/B/33033015/photo2art_hedda/test_latest
+processing (0000)-th image... ['./datasets/landscapes/B/Q1/000.jpg']
+processing (0005)-th image... ['./datasets/landscapes/B/Q1/00101.jpg']
+processing (0010)-th image... ['./datasets/landscapes/B/Q1/00106.jpg']
+processing (0015)-th image... ['./datasets/landscapes/B/Q1/00110.jpg']
+processing (0020)-th image... ['./datasets/landscapes/B/Q1/00115.jpg']
+processing (0025)-th image... ['./datasets/landscapes/B/Q1/0012.jpg']
+processing (0030)-th image... ['./datasets/landscapes/B/Q1/00124.jpg']
+processing (0035)-th image... ['./datasets/landscapes/B/Q1/00129.jpg']
+processing (0040)-th image... ['./datasets/landscapes/B/Q1/00134.jpg']
+processing (0045)-th image... ['./datasets/landscapes/B/Q1/00139.jpg']
+The chosen image for this song is 00112_fake.png
+-----------------------COMPLETE-------------------
+Linux idun-05-11 4.18.0-348.el8.0.2.x86_64 #1 SMP Sun Nov 14 00:51:12 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux

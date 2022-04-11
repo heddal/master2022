@@ -107,7 +107,7 @@ def train_songs(testing_set, training_set):
     y_pred = model.predict(X_test)
 
     accuracy = accuracy_score(y_pred, Y_test)
-    print(accuracy)
+    #print(accuracy)
 
     test_data = testing_set[training_set.columns.difference(
         ['Song', 'Quadrant'])]
