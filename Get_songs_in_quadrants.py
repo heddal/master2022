@@ -97,13 +97,14 @@ def fill_nan_spaces(df):
 def train_songs(testing_set, training_set):
     X = training_set[training_set.columns.difference(['Song', 'Quadrant'])]
     Y = training_set['Quadrant']
+    print(X.dtypes, Y.dtypes)
     test_size = 0.33
     seed = 2
     X_train, X_test, Y_train, Y_test = train_test_split(
         X, Y, test_size=test_size, random_state=seed)
 
     model = xgb.XGBClassifier(use_label_encoder=False, eval_metric='mlogloss')
-    model.fit(X_train, Y_train)
+    model.fit(X_train, Y_train, enable_categorical=)
 
     test_data = testing_set[training_set.columns.difference(
         ['Song', 'Quadrant'])]
