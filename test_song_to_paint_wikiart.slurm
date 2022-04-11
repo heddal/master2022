@@ -7,7 +7,7 @@
 #SBATCH --ntasks-per-node=20
 #SBATCH --mem=256000
 #SBATCH --job-name="train_paintings"
-#SBATCH --output=out/All/32822998.out
+#SBATCH --output=out/Wikiart/32769006.out
 #SBATCH --mail-user=hmlangvi@stud.ntnu.no
 #SBATCH --mail-type=ALL
 
@@ -29,8 +29,6 @@ echo "CUDA_VISIBLE DEVICES: $CUDA_VISIBLE_DEVICES"
 CUDA_LAUNCH_BLOCKING=1
 
 module purge
-module load CUDA/11.3.1
-module load GCCcore/11.2.0
 module load Python/3.9.6-GCCcore-11.2.0
 
 # Create environment if it doesn't exist
@@ -42,18 +40,13 @@ source env/bin/activate
 
 # Install required dependencies
 pip install --upgrade pip
-pip install -r requirements.txt
-pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 
-song_id=32822998
-results_folder = ./results/All/${song_id}
+song_id=32769006
 
-#!./scripts/train_cyclegan.sh
 echo "--------------Starting python script----------------"
 quadrant=$(python3 Get_songs_in_quadrants.py ${song_id})
-#quadrant=1
 echo "Quadrant: $quadrant"
-python3 test.py --dataroot ./datasets/All/Q${quadrant} --preprocess resize_and_crop --name photo2art_hedda --model test --no_dropout --results_dir results_folder
-python3 select_random_image.py results_folder
+folder=./datasets/All/${quadrant}
+python3 select_random_image.py ${folder}
 echo "-----------------------COMPLETE-------------------"
 uname -a

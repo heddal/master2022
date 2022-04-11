@@ -3,7 +3,9 @@ import os
 import random
 
 if __name__ == '__main__':
-    folder = sys.argv[1]+"/photo2art_hedda/test_latest/images"
+    folder = sys.argv[1]
+    if "All" not in folder:
+        folder = folder +"/photo2art_hedda/test_latest/images"
     while True:
         image_name = random.choice(os.listdir(folder))
         if "real" in  image_name:
