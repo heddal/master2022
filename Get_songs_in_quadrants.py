@@ -34,23 +34,22 @@ def clean_data_panda(dataset):
     #SampleURL, Song, Title, Sample
 
     dataset.drop(columns=['MoodsFoundStr', 'MoodsStrSplit', 'Moods',
-                          'Title', 'Sample', 'SampleURL', 'Artist', 'PQuad'], inplace=True)
+                          'Title', 'Sample', 'SampleURL', 'PQuad'], inplace=True)
     #dataset.drop(columns=['MoodsFoundStr', 'Moods', 'PQuad'], inplace=True)
 
     cleaned_dataset = strings_to_array(dataset, 'GenresStr')
     cleaned_dataset = array_to_ohe(dataset, 'GenresStr')
-    
+
     cleaned_dataset = strings_to_array(dataset, 'MoodsStr')
     cleaned_dataset = array_to_ohe(dataset, 'MoodsStr')
 
     cleaned_dataset['Quadrant'] = le.fit_transform(cleaned_dataset['Quadrant'])
+    cleaned_dataset['Artist'] = le.fit_transform(cleaned_dataset['Artist'])
 
-    return cleaned_dataset
+    return (cleaned_dataset, le)
 
 
-def clean_data(dataset):
-    le = preprocessing.LabelEncoder()
-
+def clean_data(dataset, le):
     # drop columns with no common things or gives any information:
     #SampleURL, Song, Title, Sample
     # drop all description columns
@@ -71,8 +70,8 @@ def clean_data(dataset):
     dataset.rename(columns={"idTrack": "Song",
                             "strArtist": "Artist"}, inplace=True)
 
-    transformed_dataset=dataset
-    
+    transformed_dataset = dataset
+
     if dataset['strMood'].isnull().values.any():
         dataset.drop(columns=['strMood'], inplace=True)
     else:
@@ -119,6 +118,12 @@ def train_songs(testing_set, training_set):
 
 
 def get_quadrant(song_id):
+    # get test data
+    panda_data_set = pd.read_csv(
+        'data/train_panda.csv', encoding='unicode_escape')
+    cleaned_panda, le = clean_data_panda(panda_data_set.copy())
+    panda_data_set_cleaned = cleaned_panda
+
     # get song info
     response = requests.get(
         "https://theaudiodb.com/api/v1/json/2/track.php?h=" + song_id).json()
@@ -126,13 +131,7 @@ def get_quadrant(song_id):
     song_title = song_info["strTrack"]
     data_frame = pd.DataFrame(song_info, index=[0])
     try_cleaning = data_frame.copy()
-    cleaned = clean_data(try_cleaning)
-
-    # get test data
-    panda_data_set = pd.read_csv(
-        'data/train_panda.csv', encoding='unicode_escape')
-    cleaned_panda = clean_data_panda(panda_data_set.copy())
-    panda_data_set_cleaned = cleaned_panda
+    cleaned = clean_data(try_cleaning, le)
 
     # format song info
     test_set_songs = panda_data_set_cleaned.iloc[:0].copy()
