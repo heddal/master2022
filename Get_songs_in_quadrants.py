@@ -105,7 +105,7 @@ def train_songs(testing_set, training_set):
         X, Y, test_size=test_size, random_state=seed)
 
     model = xgb.XGBClassifier(use_label_encoder=False, eval_metric='mlogloss')
-    model.fit(X_train, Y_train, enable_categorical=)
+    model.fit(X_train, Y_train)
 
     test_data = testing_set[training_set.columns.difference(
         ['Song', 'Quadrant'])]
