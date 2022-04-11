@@ -2,6 +2,7 @@ from json.tool import main
 import requests
 import pandas as pd
 import xgboost as xgb
+import numpy as np
 import sys
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
@@ -42,13 +43,12 @@ def clean_data_panda(dataset):
     cleaned_dataset = array_to_ohe(cleaned_dataset, 'MoodsStr')
 
     cleaned_dataset['Quadrant'] = le.fit_transform(cleaned_dataset['Quadrant'])
-    cleaned_dataset['Artist'] = cleaned_dataset['Artist'].astype(str).str.encode(
-        'UTF-8').apply(lambda x: int(hashlib.md5(x).hexdigest(), 16))
+    cleaned_dataset['Artist'] = le.fit_transform(cleaned_dataset['Artist'])
 
-    return cleaned_dataset
+    return (cleaned_dataset, le)
 
 
-def clean_data(dataset):
+def clean_data(dataset, le):
 
     countries = ['EN', 'DE', 'FR', 'CN', 'IT', 'JP', 'RU',
                  'ES', 'PT', 'SE', 'NL', 'HU', 'NO', 'IL', 'PL']
@@ -81,8 +81,10 @@ def clean_data(dataset):
         transformed_dataset = strings_to_array(transformed_dataset, 'strGenre')
         transformed_dataset = array_to_ohe(transformed_dataset, 'strGenre')
 
-    transformed_dataset['Artist'] = transformed_dataset['Artist'].astype(
-        str).str.encode('UTF-8').apply(lambda x: int(hashlib.md5(x).hexdigest(), 16))
+    transformed_dataset['Artist'] = transformed_dataset['Artist'].map(
+        lambda s: '<unknown>' if s not in le.classes_ else s)
+    le.classes_ = np.append(le.classes_, '<unknown>')
+    transformed_dataset['Artist'] = le.transform(transformed_dataset['Artist'])
 
     return transformed_dataset
 
@@ -97,7 +99,6 @@ def fill_nan_spaces(df):
 def train_songs(testing_set, training_set):
     X = training_set[training_set.columns.difference(['Song', 'Quadrant'])]
     Y = training_set['Quadrant']
-    print(X.dtypes, Y.dtypes)
     test_size = 0.33
     seed = 2
     X_train, X_test, Y_train, Y_test = train_test_split(
@@ -117,7 +118,7 @@ def get_quadrant(song_id):
     # get test data
     panda_data_set = pd.read_csv(
         'data/train_panda.csv', encoding='unicode_escape')
-    cleaned_panda = clean_data_panda(panda_data_set.copy())
+    cleaned_panda, le = clean_data_panda(panda_data_set.copy())
     panda_data_set_cleaned = cleaned_panda
 
     # get song info
@@ -127,7 +128,7 @@ def get_quadrant(song_id):
     song_title = song_info["strTrack"]
     data_frame = pd.DataFrame(song_info, index=[0])
     try_cleaning = data_frame.copy()
-    cleaned = clean_data(try_cleaning)
+    cleaned = clean_data(try_cleaning, le)
 
     # format song info
     test_set_songs = panda_data_set_cleaned.iloc[:0].copy()
