@@ -38,9 +38,9 @@ def clean_data_panda(dataset):
     #dataset.drop(columns=['MoodsFoundStr', 'Moods', 'PQuad'], inplace=True)
 
     cleaned_dataset = strings_to_array(dataset, 'GenresStr')
-    cleaned_dataset = strings_to_array(dataset, 'MoodsStr')
-
     cleaned_dataset = array_to_ohe(dataset, 'GenresStr')
+    
+    cleaned_dataset = strings_to_array(dataset, 'MoodsStr')
     cleaned_dataset = array_to_ohe(dataset, 'MoodsStr')
 
     cleaned_dataset['Quadrant'] = le.fit_transform(cleaned_dataset['Quadrant'])
@@ -70,11 +70,20 @@ def clean_data(dataset):
 
     dataset.rename(columns={"idTrack": "Song",
                             "strArtist": "Artist"}, inplace=True)
-    transformed_dataset = strings_to_array(dataset, 'strMood')
-    transformed_dataset = strings_to_array(transformed_dataset, 'strGenre')
 
-    transformed_dataset = array_to_ohe(transformed_dataset, 'strMood')
-    transformed_dataset = array_to_ohe(transformed_dataset, 'strGenre')
+    transformed_dataset=dataset
+    
+    if dataset['strMood'].isnull().values.any():
+        dataset.drop(columns=['strMood'], inplace=True)
+    else:
+        transformed_dataset = strings_to_array(transformed_dataset, 'strMood')
+        transformed_dataset = array_to_ohe(transformed_dataset, 'strMood')
+
+    if dataset['strGenre'].isnull().values.any():
+        dataset.drop(columns=['strGenre'], inplace=True)
+    else:
+        transformed_dataset = strings_to_array(transformed_dataset, 'strGenre')
+        transformed_dataset = array_to_ohe(transformed_dataset, 'strGenre')
 
     transformed_dataset['Artist'] = le.fit_transform(
         transformed_dataset['Artist'])
