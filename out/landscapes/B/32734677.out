@@ -1,7 +1,7 @@
 Lets go
 We are running from this directory: /cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix
 The name of the job is: train_paintings
-The job ID is 2869707
+The job ID is 2869765
 The job was run on these nodes: idun-05-11
 Number of nodes: 1
 We are using 20 cores
@@ -23,8 +23,8 @@ Looking in links: https://download.pytorch.org/whl/cu113/torch_stable.html
 Requirement already satisfied: torch==1.10.2+cu113 in ./env/lib/python3.6/site-packages (1.10.2+cu113)
 Requirement already satisfied: torchvision==0.11.3+cu113 in ./env/lib/python3.6/site-packages (0.11.3+cu113)
 Requirement already satisfied: torchaudio==0.10.2+cu113 in ./env/lib/python3.6/site-packages (0.10.2+cu113)
-Requirement already satisfied: typing-extensions in ./env/lib/python3.6/site-packages (from torch==1.10.2+cu113) (4.1.1)
 Requirement already satisfied: dataclasses in ./env/lib/python3.6/site-packages (from torch==1.10.2+cu113) (0.8)
+Requirement already satisfied: typing-extensions in ./env/lib/python3.6/site-packages (from torch==1.10.2+cu113) (4.1.1)
 Requirement already satisfied: numpy in ./env/lib/python3.6/site-packages (from torchvision==0.11.3+cu113) (1.19.5)
 Requirement already satisfied: pillow!=8.3.0,>=5.3.0 in ./env/lib/python3.6/site-packages (from torchvision==0.11.3+cu113) (8.4.0)
 --------------Starting python script----------------
@@ -90,6 +90,6 @@ processing (0030)-th image... ['./datasets/landscapes/B/Q2/00124.jpg']
 processing (0035)-th image... ['./datasets/landscapes/B/Q2/00129.jpg']
 processing (0040)-th image... ['./datasets/landscapes/B/Q2/00133.jpg']
 processing (0045)-th image... ['./datasets/landscapes/B/Q2/00138.jpg']
-The chosen image for this song is 00139_fake.png
+The chosen image for this song is 0014_fake.png
 -----------------------COMPLETE-------------------
 Linux idun-05-11 4.18.0-348.el8.0.2.x86_64 #1 SMP Sun Nov 14 00:51:12 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
