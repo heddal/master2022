@@ -96,14 +96,18 @@ def clean_data(dataset, le):
 def train_songs(testing_set, training_set):
     X = training_set[training_set.columns.difference(['Song', 'Quadrant'])]
     Y = training_set['Quadrant']
-    test_size = 0.33
+    test_size = 0.3
     seed = 2
     X_train, X_test, Y_train, Y_test = train_test_split(
         X, Y, test_size=test_size, random_state=seed)
 
-    model = xgb.XGBClassifier(use_label_encoder=False, eval_metric='mlogloss')
+    model = xgb.XGBClassifier(max_depth=4, min_child_weight=0, gamma=0.05, colsample_bytree=0.4, subsample=0.6,
+                              use_label_encoder=False, eval_metric='mlogloss')
     model.fit(X_train, Y_train)
     y_pred = model.predict(X_test)
+
+    accuracy = accuracy_score(y_pred, Y_test)
+    print(accuracy)
 
     test_data = testing_set[training_set.columns.difference(
         ['Song', 'Quadrant'])]
@@ -119,7 +123,6 @@ def get_quadrant(song_id):
         'data/train_panda.csv', encoding='unicode_escape')
     cleaned_panda, leQ, leA = clean_data_panda(panda_data_set.copy())
     panda_data_set_cleaned = cleaned_panda
-    print(panda_data_set_cleaned.head(1).values.tolist())
 
     # get song info
     response = requests.get(
@@ -129,7 +132,6 @@ def get_quadrant(song_id):
     data_frame = pd.DataFrame(song_info, index=[0])
     try_cleaning = data_frame.copy()
     cleaned = clean_data(try_cleaning, leA)
-    print(cleaned.head(1).values.tolist())
 
     # format song info
     test_set_songs = panda_data_set_cleaned.iloc[:0].copy()
@@ -140,7 +142,6 @@ def get_quadrant(song_id):
     final_test_set_songs = test_set_songs[common_cols]
 
     final_test_set_songs = final_test_set_songs.fillna(0)
-    print(final_test_set_songs.head(1).values.tolist())
 
     # testing and traning set
     testing_set = final_test_set_songs
