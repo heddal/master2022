@@ -47,6 +47,6 @@ echo "--------------Starting python script----------------"
 quadrant=$(python3 Get_songs_in_quadrants.py ${song_id})
 echo "Quadrant: $quadrant"
 folder=./datasets/All/${quadrant}
-python3 select_random_image.py ${folder}
+python3 select_modern_and_not_images.py ${folder}
 echo "-----------------------COMPLETE-------------------"
 uname -a

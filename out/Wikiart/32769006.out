@@ -1,6 +1,6 @@
 We are running from this directory: /cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix
 The name of the job is: train_paintings
-The job ID is 2869786
+The job ID is 2869806
 The job was run on these nodes: idun-05-13
 Number of nodes: 1
 We are using 20 cores
@@ -10,6 +10,21 @@ CUDA_VISIBLE DEVICES: 0,1
 Requirement already satisfied: pip in ./env/lib/python3.6/site-packages (21.3.1)
 --------------Starting python script----------------
 Quadrant: Q4
-The chosen image for this song is dissolving-houses-1920.jpg
+Traceback (most recent call last):
+  File "select_modern_and_not_images.py", line 10, in <module>
+    wikiart_info = pd.read_csv('data/WikiArt-Ag4-cleaned.tsv', sep='\t')
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/pandas/io/parsers.py", line 688, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/pandas/io/parsers.py", line 454, in _read
+    parser = TextFileReader(fp_or_buf, **kwds)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/pandas/io/parsers.py", line 948, in __init__
+    self._make_engine(self.engine)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/pandas/io/parsers.py", line 1180, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/pandas/io/parsers.py", line 2010, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 382, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 674, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: [Errno 2] No such file or directory: 'data/WikiArt-Ag4-cleaned.tsv'
 -----------------------COMPLETE-------------------
 Linux idun-05-13 4.18.0-348.el8.0.2.x86_64 #1 SMP Sun Nov 14 00:51:12 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
