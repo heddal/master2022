@@ -7,7 +7,7 @@
 #SBATCH --ntasks-per-node=20
 #SBATCH --mem=256000
 #SBATCH --job-name="train_paintings"
-#SBATCH --output=out/Wikiart/32822998.out
+#SBATCH --output=out/Wikiart/32769006.out
 #SBATCH --mail-user=hmlangvi@stud.ntnu.no
 #SBATCH --mail-type=ALL
 
@@ -41,12 +41,11 @@ source env/bin/activate
 # Install required dependencies
 pip install --upgrade pip
 
-song_id=32822998
+song_id=32769006
 
 echo "--------------Starting python script----------------"
 quadrant=$(python3 Get_songs_in_quadrants.py ${song_id})
 echo "Quadrant: $quadrant"
-folder=./datasets/All/${quadrant}
-python3 select_modern_and_not_images.py ${folder}
+python3 select_modern_and_not_images.py ${quadrant}
 echo "-----------------------COMPLETE-------------------"
 uname -a
