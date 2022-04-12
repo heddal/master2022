@@ -1,7 +1,7 @@
 We are running from this directory: /cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix
 The name of the job is: train_paintings
-The job ID is 2869813
-The job was run on these nodes: idun-05-13
+The job ID is 2870164
+The job was run on these nodes: idun-06-03
 Number of nodes: 1
 We are using 20 cores
 We are using 20 cores per node
@@ -10,11 +10,3 @@ CUDA_VISIBLE DEVICES: 0,1
 Requirement already satisfied: pip in ./env/lib/python3.6/site-packages (21.3.1)
 --------------Starting python script----------------
 Quadrant: Q4
-Traceback (most recent call last):
-  File "select_modern_and_not_images.py", line 13, in <module>
-    if wikiart_info[(wikiart_info['Title'] == image_name) & (wikiart_info['Style'] == "Modern Art")].any() & a==0:
-  File "/cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix/env/lib64/python3.6/site-packages/pandas/core/generic.py", line 1330, in __nonzero__
-    f"The truth value of a {type(self).__name__} is ambiguous. "
-ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
------------------------COMPLETE-------------------
-Linux idun-05-13 4.18.0-348.el8.0.2.x86_64 #1 SMP Sun Nov 14 00:51:12 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
