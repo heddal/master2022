@@ -8,13 +8,13 @@ if __name__ == '__main__':
     a = 0
     b = 0
     wikiart_info = pd.read_csv('data/WikiArt-Ag4-cleaned.tsv', sep='\t')
+    correct_style = wikiart_info.loc[wikiart_info['Style']
+                                     == 'Post Renaissance Art']
     while a == 0 or b == 0:
         image_name = random.choice(os.listdir(folder))
-        print("Looking at image",image_name)
-        if ((wikiart_info['Title'] == image_name) & (wikiart_info['Style'] == 'Modern Art')).any() and a < 1:
-            print("The chosen modern image for this song is", image_name)
+        if (correct_style['Title'].apply(lambda x: True if correct_style['Image URL'].str.contains(image_name).any() else False).any()) and a == 0:
+            print("The chosen post renaissance image for this song is", image_name)
             a += 1
-        elif ((wikiart_info['Title'] == image_name) & (wikiart_info['Style'] != 'Modern Art')).any() and b < 1:
-            print("The chosen non-modern image for this song is", image_name)
+        elif b == 0:
+            print("The chosen general image for this song is", image_name)
             b += 1
-        print(a,",",b)
