@@ -1,7 +1,7 @@
 We are running from this directory: /cluster/home/hmlangvi/pytorch-CycleGAN-and-pix2pix
 The name of the job is: train_paintings
-The job ID is 2869781
-The job was run on these nodes: idun-05-13
+The job ID is 2870170
+The job was run on these nodes: idun-06-03
 Number of nodes: 1
 We are using 20 cores
 We are using 20 cores per node
@@ -10,6 +10,7 @@ CUDA_VISIBLE DEVICES: 0,1
 Requirement already satisfied: pip in ./env/lib/python3.6/site-packages (21.3.1)
 --------------Starting python script----------------
 Quadrant: Q1
-The chosen image for this song is an-allegory-of-peace-and-the-arts-under-the-english-crown-1638.jpg
+The chosen general image for this song is the-striped-blouse.jpg
+The chosen post renaissance image for this song is grand-prayer-rug-1966.jpg
 -----------------------COMPLETE-------------------
-Linux idun-05-13 4.18.0-348.el8.0.2.x86_64 #1 SMP Sun Nov 14 00:51:12 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+Linux idun-06-03 4.18.0-348.el8.0.2.x86_64 #1 SMP Sun Nov 14 00:51:12 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
