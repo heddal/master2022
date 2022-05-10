@@ -1,4 +1,4 @@
-# CycleGAN and pix2pix in PyTorch
+# Master's Thesis 2022
 
 This is the code for a Master's Thesis using Russell's Quadrants to unite auditory and visual stimuli. Much of the code is from [Zhu et al.'s unpaired image-to-iamage translation](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix). The repository is extended with new code with connects song with images based on their metadata. 
 
