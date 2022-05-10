@@ -1,13 +1,18 @@
 # CycleGAN and pix2pix in PyTorch
 
-This is the code for a Master's Thesis using Russell's Quadrants to unite auditory and visual stimuli. Much of the code is from [Zhu et al.'s unpaired image-to-iamage translation](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix).
+This is the code for a Master's Thesis using Russell's Quadrants to unite auditory and visual stimuli. Much of the code is from [Zhu et al.'s unpaired image-to-iamage translation](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix). The repository is extended with new code with connects song with images based on their metadata. 
 
 
+# Details from the README of the original CycleGAN repository
 ## Prerequisites
 
 - Linux or macOS
 - Python 3
 - CPU or NVIDIA GPU + CUDA CuDNN
+
+## Acknowledgments
+
+The image-to-image translation code used in this project is retrieved from [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix). 
 
 ## Getting Started
 
@@ -54,35 +59,6 @@ python test.py --dataroot ./datasets/maps --name maps_cyclegan --model cycle_gan
 
 - The test results will be saved to a html file here: `./results/maps_cyclegan/latest_test/index.html`.
 
-### pix2pix train/test
-
-- Download a pix2pix dataset (e.g.[facades](http://cmp.felk.cvut.cz/~tylecr1/facade/)):
-
-```bash
-bash ./datasets/download_pix2pix_dataset.sh facades
-```
-
-- To view training results and loss plots, run `python -m visdom.server` and click the URL http://localhost:8097.
-- To log training progress and test images to W&B dashboard, set the `--use_wandb` flag with train and test script
-- Train a model:
-
-```bash
-#!./scripts/train_pix2pix.sh
-python train.py --dataroot ./datasets/facades --name facades_pix2pix --model pix2pix --direction BtoA
-```
-
-To see more intermediate results, check out `./checkpoints/facades_pix2pix/web/index.html`.
-
-- Test the model (`bash ./scripts/test_pix2pix.sh`):
-
-```bash
-#!./scripts/test_pix2pix.sh
-python test.py --dataroot ./datasets/facades --name facades_pix2pix --model pix2pix --direction BtoA
-```
-
-- The test results will be saved to a html file here: `./results/facades_pix2pix/test_latest/index.html`. You can find more scripts at `scripts` directory.
-- To train and test pix2pix-based colorization models, please add `--model colorization` and `--dataset_mode colorization`. See our training [tips](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/docs/tips.md#notes-on-colorization) for more details.
-
 ### Apply a pre-trained model (CycleGAN)
 
 - You can download a pretrained model (e.g. horse2zebra) with the following script:
@@ -108,33 +84,6 @@ python test.py --dataroot datasets/horse2zebra/testA --name horse2zebra_pretrain
 
 - For pix2pix and your own models, you need to explicitly specify `--netG`, `--norm`, `--no_dropout` to match the generator architecture of the trained model. See this [FAQ](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/docs/qa.md#runtimeerror-errors-in-loading-state_dict-812-671461-296) for more details.
 
-### Apply a pre-trained model (pix2pix)
-
-Download a pre-trained model with `./scripts/download_pix2pix_model.sh`.
-
-- Check [here](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/scripts/download_pix2pix_model.sh#L3) for all the available pix2pix models. For example, if you would like to download label2photo model on the Facades dataset,
-
-```bash
-bash ./scripts/download_pix2pix_model.sh facades_label2photo
-```
-
-- Download the pix2pix facades datasets:
-
-```bash
-bash ./datasets/download_pix2pix_dataset.sh facades
-```
-
-- Then generate the results using
-
-```bash
-python test.py --dataroot ./datasets/facades/ --direction BtoA --model pix2pix --name facades_label2photo_pretrained
-```
-
-- Note that we specified `--direction BtoA` as Facades dataset's A to B direction is photos to labels.
-
-- If you would like to apply a pre-trained model to a collection of input images (rather than image pairs), please use `--model test` option. See `./scripts/test_single.sh` for how to apply a model to Facade label maps (stored in the directory `facades/testB`).
-
-- See a list of currently available models at `./scripts/download_pix2pix_model.sh`
 
 ## [Docker](docs/docker.md)
 
@@ -159,13 +108,3 @@ If you plan to implement custom models and dataset for your new applications, we
 ## [Code structure](docs/overview.md)
 
 To help users better understand and use our code, we briefly overview the functionality and implementation of each package and each module.
-
-## Pull Request
-
-You are always welcome to contribute to this repository by sending a [pull request](https://help.github.com/articles/about-pull-requests/).
-Please run `flake8 --ignore E501 .` and `python ./scripts/test_before_push.py` before you commit the code. Please also update the code structure [overview](docs/overview.md) accordingly if you add or remove files.
-
-
-## Acknowledgments
-
-The image-to-image translation code used in this project is retrieved from [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix). 
