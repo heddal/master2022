@@ -100,14 +100,14 @@ def train_songs(testing_set, training_set):
     seed = 2
     X_train, X_test, Y_train, Y_test = train_test_split(
         X, Y, test_size=test_size, random_state=seed)
-
+#
     model = xgb.XGBClassifier(max_depth=4, min_child_weight=0, gamma=0.05, colsample_bytree=0.4, subsample=0.6,
                               use_label_encoder=False, eval_metric='mlogloss')
     model.fit(X_train, Y_train)
     y_pred = model.predict(X_test)
 
     accuracy = accuracy_score(y_pred, Y_test)
-    #print(accuracy)
+    print(accuracy)
 
     test_data = testing_set[training_set.columns.difference(
         ['Song', 'Quadrant'])]
