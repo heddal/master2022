@@ -6,8 +6,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=20
 #SBATCH --mem=256000
-#SBATCH --job-name="train_paintings"
-#SBATCH --output=out/Wikiart/32769006.out
+#SBATCH --job-name="test_100"
+#SBATCH --output=out/test_100.out
 #SBATCH --mail-user=hmlangvi@stud.ntnu.no
 #SBATCH --mail-type=ALL
 
@@ -42,6 +42,6 @@ source env/bin/activate
 pip install --upgrade pip
 
 echo "--------------Starting python script----------------"
-python3 test.py --dataroot ./datasets/landscapes/A/Q2 --name monet2photo_pretrained --model test --no_dropout --results_dir test_100
+python3 test.py --dataroot ./datasets/landscapes/A/Q2 --name photo2art_hedda_100 --model test --no_dropout --results_dir results/test_100
 echo "-----------------------COMPLETE-------------------"
 uname -a
